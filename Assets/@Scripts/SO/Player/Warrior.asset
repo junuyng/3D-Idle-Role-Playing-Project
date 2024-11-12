@@ -20,8 +20,8 @@ MonoBehaviour:
     <CriticalDamagePercentage>k__BackingField: 1.2
     <CriticalChance>k__BackingField: 0.3
   movementData:
-    <RotationSpeed>k__BackingField: 0
-    <MoveSpeed>k__BackingField: 10
+    <RotationSpeed>k__BackingField: 1
+    <MoveSpeed>k__BackingField: 1
     <RunSpeed>k__BackingField: 0
   experienceData:
     <Level>k__BackingField: 1

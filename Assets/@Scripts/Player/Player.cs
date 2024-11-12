@@ -10,6 +10,9 @@ public class Player: MonoBehaviour
     [field: SerializeField] public PlayerSO Data { get; private set;}
     public PlayerAnimationData AnimationData { get; private set;}
     public CharacterController Controller;
+    public Vector3 originPos; 
+    
+    
     public Animator Animator;
   
     public PlayerStatHandler statHandler;
@@ -20,6 +23,7 @@ public class Player: MonoBehaviour
         statHandler = new PlayerStatHandler(Data);
         stateMachine = new PlayerStateMachine(this, statHandler);
         AnimationData = new PlayerAnimationData();
+        originPos = transform.position;
     }
 
     private void Start()
@@ -37,4 +41,7 @@ public class Player: MonoBehaviour
     {
         stateMachine.FixedUpdateState();
     }
+    
+
+
 }
