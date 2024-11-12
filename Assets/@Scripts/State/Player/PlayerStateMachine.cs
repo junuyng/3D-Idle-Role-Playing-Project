@@ -10,7 +10,7 @@ public class PlayerStateMachine : StateMachine
 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkState WalkState { get; private set; }
-    public PlayerRunState RuntState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
 
     public PlayerStateMachine(Player _player, PlayerStatHandler _statHandler)
     {
@@ -19,7 +19,7 @@ public class PlayerStateMachine : StateMachine
 
         IdleState = new PlayerIdleState(this);
         WalkState = new PlayerWalkState(this);
-        RuntState = new PlayerRunState(this);
+        AttackState = new PlayerAttackState(this);
         MainCamTransform = Camera.main.transform;
     }
 

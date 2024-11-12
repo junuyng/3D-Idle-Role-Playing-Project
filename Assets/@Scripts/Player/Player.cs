@@ -10,9 +10,10 @@ public class Player: MonoBehaviour
     [field: SerializeField] public PlayerSO Data { get; private set;}
     public PlayerAnimationData AnimationData { get; private set;}
     public CharacterController Controller;
-    public Vector3 originPos; 
-    
-    
+    public Vector3 originPos;
+    public GameObject weapon;
+    public GameObject target;
+
     public Animator Animator;
   
     public PlayerStatHandler statHandler;
