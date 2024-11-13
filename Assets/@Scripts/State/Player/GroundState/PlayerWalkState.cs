@@ -1,34 +1,33 @@
-﻿
-    using UnityEngine;
+﻿using UnityEngine;
 
-    public class PlayerWalkState : PlayerGroundState
+public class PlayerWalkState : PlayerGroundState
+{
+    public PlayerWalkState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        public PlayerWalkState(PlayerStateMachine stateMachine) : base(stateMachine)
-        {
-        }
+    }
 
-        public override void Enter()
-        {
-            base.Enter();
-            stats.StatModifier = 1f;
-            StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
-        }
-    
-        public override void Exit()
-        {
-            base.Exit();
-            StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
-        }
+    public override void Enter()
+    {
+        base.Enter();
+         stats.StatModifier = 1f;
+        StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+    }
 
-        public override void Update()
-        {
-            base.Update();
-            Move();
-            if(CanAttack())
-                stateMachine.ChangeState(stateMachine.AttackState);
-        }
+    public override void Exit()
+    {
+        base.Exit();
+        StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+    }
 
-            private void Move()
+    public override void Update()
+    {
+        base.Update();
+        Move();
+        if (CanAttack())
+            stateMachine.ChangeState(stateMachine.AttackState);
+    }
+
+    private void Move()
     {
         Vector3 moveDirection = GetMovementDirection();
         Move(moveDirection);
@@ -47,7 +46,7 @@
         Collider[] colls = new Collider[Define.DETECTION_ARRAY_SIZE];
         Vector3 direction = Vector3.zero;
 
-        
+
         int count = Physics.OverlapSphereNonAlloc(
             stateMachine.Player.transform.position,
             Define.ENEMY_DETECTION_RADIUS,
@@ -55,7 +54,7 @@
             LayerMask.GetMask("Enemy")
         );
 
-        
+
         // 적이 있고 target이 설정되지 않았다면
         if (count > 0)
         {
@@ -69,10 +68,7 @@
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    
-                    if(stateMachine.Player.target == null)
-                        stateMachine.Player.target = coll.gameObject;
-                    
+                    stateMachine.Player.target = coll.gameObject;
                     direction = coll.transform.position - stateMachine.Player.transform.position;
                     direction.y = 0;
                 }
@@ -80,19 +76,19 @@
 
             return direction.normalized;
         }
-
         
-
-        //현재 플레이어 x 좌표가 기존 x좌표와 다르다면 
+        
+        //TODO 플레이어가 이동한 X가 기존 플레이어의 X축과 크게 차이나지 않으면 급격한 회전
         float dirX = stateMachine.Player.originPos.x - stateMachine.Player.transform.position.x;
+        
         if (Mathf.Abs(dirX) > 0.05f)
         {
-            direction = new Vector3(dirX, 0, 1); 
+            direction = new Vector3(dirX, 0, 1);
             return direction.normalized;
         }
 
-        
-        return Vector3.forward;  
+
+        return Vector3.forward;
     }
 
 
@@ -116,29 +112,25 @@
                 stats.RotationSpeed * Time.deltaTime);
         }
     }
-    
-    
-        
-        private bool  CanAttack()
-        {
-            
-            Collider[] colls = new Collider[Define.DETECTION_ARRAY_SIZE];
-            Vector3 direction = Vector3.zero;
-            
-            int count = Physics.OverlapSphereNonAlloc(
-                stateMachine.Player.transform.position,
-                Define.ATTACK_RANGE
-                ,
-                colls,
-                LayerMask.GetMask("Enemy")
-            );
 
-            if (count > 0)
-            {
-                return true;
-            }
-            
-            return false;
+
+    private bool CanAttack()
+    {
+        Collider[] colls = new Collider[Define.DETECTION_ARRAY_SIZE];
+        Vector3 direction = Vector3.zero;
+
+        int count = Physics.OverlapSphereNonAlloc(
+            stateMachine.Player.transform.position,
+            Define.ATTACK_RANGE,
+            colls,
+            LayerMask.GetMask("Enemy")
+        );
+
+        if (count > 0)
+        {
+            return true;
         }
 
+        return false;
     }
+}

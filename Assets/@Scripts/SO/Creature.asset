@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Creature
   m_EditorClassIdentifier: 
   data:
-    <Level>k__BackingField: 1
-    <MaxHP>k__BackingField: 0
-  attackData:
+    <MaxHP>k__BackingField: 100
+  combatData:
     <AttackPower>k__BackingField: 0
     <DefensePower>k__BackingField: 0
     <CriticalDamagePercentage>k__BackingField: 0

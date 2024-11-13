@@ -1,7 +1,4 @@
-﻿
-
-
-
+﻿using UnityEngine;
 
 public class PlayerStatHandler
 {
@@ -13,7 +10,7 @@ public class PlayerStatHandler
     public PlayerStatHandler(PlayerSO _data)
     {
         data = _data;
-        Stats = new PlayerStats(); 
+        Stats = new PlayerStats();
         InitialStat();
     }
 
@@ -39,10 +36,44 @@ public class PlayerStatHandler
         Stats.ExperienceGain = data.ExperienceData.ExperienceGain;
     }
 
- 
 
-
-    private void CacheStatsFromData(PlayerStats stats)
+    public float GetDamage()
     {
+        float baseDamage = Stats.AttackPower;
+
+        bool isCritical = UnityEngine.Random.value < Stats.CriticalChance;
+
+        float finalDamage = isCritical ? baseDamage * (1 + Stats.CriticalDamagePercentage / 100) : baseDamage;
+        return finalDamage;
+    }
+
+
+    public void ApplyLevelUpStats()
+    {
+        float level = GameManager.Instance.Player.LevelSystem.Level;
+
+        // 레벨에 따른 스탯 증가
+        Stats.AttackPower += level * Define.ATTACK_POWER_INCREASE_RATE;
+        Stats.DefensePower += level * Define.DEFENSE_POWER_INCREASE_RATE;
+        Stats.CriticalDamagePercentage += level * Define.CRITICAL_DAMAGE_INCREASE_RATE;
+        Stats.CriticalChance += level * Define.CRITICAL_CHANCE_INCREASE_RATE;
+    }
+
+    public void AdjustStatsForEquipment(Item item, bool isEquipping)
+    {
+        int modifier = isEquipping ? 1 : -1;
+
+        switch (item.data.type)
+        {
+            case Define.ItemType.Weapon:
+                Stats.AttackPower += item.data.stat * item.level * modifier;
+                break;
+
+            case Define.ItemType.Armor:
+                Stats.DefensePower += item.data.stat * item.level * modifier;
+                break;
+        }
+
+        Debug.Log("공격력 증가" + Stats.AttackPower);
     }
 }

@@ -6,8 +6,7 @@ public class PlayerStats
     
     //스탯 값에 영향을 직접적으로 주지 않고 다루기 위한 데이터
     public float StatModifier { get; set; }
-
-    
+   
     //변동 가능한 데이터 영역 
     public float MaxHP { get;  set; }
     public float AttackPower { get;  set; } 
@@ -22,4 +21,4 @@ public class PlayerStats
     public float CurEXP { get;  set; }
     public int ExperienceGain { get;  set; }
     public float JumpForce { get;  set; }
-}
+ }

@@ -2,6 +2,11 @@
 
 public class PlayerAttackState : PlayerGroundState
 {
+    //TODO Player 직업에 따라 상수 가져와 설정 하도록 
+    
+    private float lastActivationTime = 0f; // 마지막 활성화 시점 기록
+         
+
     private float attackStartTime;
     private bool weaponIsOn = false; // 무기 상태를 추적하는 플래그
 
@@ -32,27 +37,29 @@ public class PlayerAttackState : PlayerGroundState
         base.Update();
 
         Attack();
-
+       
         if (stateMachine.Player.target == null)
         {
             stateMachine.ChangeState(stateMachine.WalkState);
+            //TODO 몬스터 정보 불러와서 수정 
+            GameManager.Instance.Player.LevelSystem.AddExp(100);
         }
     }
 
+
+
+    //TODO 피격 타임 정상화 시키기
     private void Attack()
     {
-        if (!weaponIsOn && Time.time - attackStartTime >= Define.WARRIOR_WEAPON_ON_TIME)
+        float activationInterval = 0.13f; 
+
+        if (Time.time >= lastActivationTime + activationInterval)
         {
             stateMachine.Player.weapon.SetActive(true);
             weaponIsOn = true;
-            attackStartTime = Time.time;
-        }
-
-        else if (weaponIsOn && Time.time - attackStartTime >= Define.WARRIOR_WEAPON_OFF_TIME)
-        {
-            stateMachine.Player.weapon.SetActive(false);
-            weaponIsOn = false;
-            attackStartTime = Time.time;
+            lastActivationTime = Time.time; // 마지막 활성화 시간 갱신
         }
     }
+
+
 }

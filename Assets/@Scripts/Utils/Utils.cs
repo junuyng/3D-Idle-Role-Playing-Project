@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Utils
+public static class Utils
 {
-    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+ 
+
+    public static string  RemoveCloneFormat( string target)
     {
-        var component = go.GetComponent<T>();
+        int index = target.IndexOf("(Clone)");
+        if (index >= 0) 
+            target = target.Substring(0, index);
 
-        if (component == null)
-            component.gameObject.AddComponent<T>();
-
-        return component;
+        return target;
     }
 }

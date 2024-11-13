@@ -11,19 +11,25 @@ public class Player: MonoBehaviour
     public PlayerAnimationData AnimationData { get; private set;}
     public CharacterController Controller;
     public Vector3 originPos;
+    
     public GameObject weapon;
     public GameObject target;
-
-    public Animator Animator;
+    
+    public Inventory Inventory { get; private set; }
   
     public PlayerStatHandler statHandler;
     private PlayerStateMachine stateMachine;
+    public Animator Animator;
 
+    public LevelSystem LevelSystem  { get; private set; }
+    
     private void Awake()
     {
+        Inventory = GetComponent<Inventory>();
         statHandler = new PlayerStatHandler(Data);
         stateMachine = new PlayerStateMachine(this, statHandler);
         AnimationData = new PlayerAnimationData();
+        LevelSystem = new LevelSystem(statHandler);
         originPos = transform.position;
     }
 
@@ -43,6 +49,4 @@ public class Player: MonoBehaviour
         stateMachine.FixedUpdateState();
     }
     
-
-
 }

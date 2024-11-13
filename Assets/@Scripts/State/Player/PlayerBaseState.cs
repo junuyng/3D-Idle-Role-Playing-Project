@@ -1,8 +1,5 @@
 ﻿//모든 상태에서 공통 적인 부분을 담당하는 클래스
 
-using UnityEngine;
-using UnityEngine.UIElements;
-
 public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
@@ -40,6 +37,6 @@ public class PlayerBaseState : IState
     {
         stateMachine.Player.Animator.SetBool(animatorHash, false);
     }
-
+  
 
 }
