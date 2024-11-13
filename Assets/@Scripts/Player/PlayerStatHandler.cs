@@ -5,7 +5,7 @@ public class PlayerStatHandler
     private PlayerSO data;
 
 
-    public PlayerStats Stats { get; private set; }
+    public PlayerStats Stats { get;  set; }
 
     public PlayerStatHandler(PlayerSO _data)
     {
@@ -74,6 +74,6 @@ public class PlayerStatHandler
                 break;
         }
 
-        Debug.Log("공격력 증가" + Stats.AttackPower);
+        Debug.Log($"기존 공격력 {Stats.AttackPower -(item.data.stat * item.level * modifier)} 추가 공격력{Stats.AttackPower}");
     }
 }

@@ -2531,7 +2531,7 @@ Transform:
   m_GameObject: {fileID: 6182942525851315228}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: 0.8444448, z: -0.19315639}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2580,11 +2580,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 20d051970df36664a92c1c6f778007d4,
     type: 2}
-  Controller: {fileID: 1706560458368952626}
-  originPos: {x: 0, y: 0, z: 0}
+  controller: {fileID: 1706560458368952626}
+  Animator: {fileID: 1219845919590514416}
   weapon: {fileID: 6004439153197289804}
   target: {fileID: 0}
-  Animator: {fileID: 1219845919590514416}
+  originPos: {x: 0, y: 0, z: 0}
 --- !u!95 &1219845919590514416
 Animator:
   serializedVersion: 5
@@ -2634,8 +2634,10 @@ MonoBehaviour:
   weaponItems:
   - data: {fileID: 11400000, guid: 194e865de0b933146899fc33fdbdf68c, type: 2}
     level: 1
+    isEquipped: 0
   - data: {fileID: 11400000, guid: f5b4c7f983cbccc4d8bd0af96ec9b5c3, type: 2}
     level: 1
+    isEquipped: 0
   armorItems: []
   potionItems: []
 --- !u!1 &6256162647690946345

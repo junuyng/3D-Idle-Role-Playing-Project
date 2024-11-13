@@ -8,36 +8,33 @@ using Random = UnityEngine.Random;
 
 public class StageManager : MonoBehaviour
 {
-    //enemyPrefab가 더 많아질 것 같으면 pool 사용
+    //enemy 소환이  더 많아질 것 같으면  pool 사용 방식도 고려 해봐야 함
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject[] bossPrefabs;
     [SerializeField] private GameObject[] floor;
-
+    [SerializeField] private GameObject playerPrefab;
+    
     public int StageLevel { get; set; } = 1;
     private List<GameObject> enemies = new List<GameObject>();
 
+    private GameObject bossEnemy;
 
     private void Awake()
     {
         EnemyGeneratorByLevel();
         MapGeneratorByLevel();
+         GameObject player =  Instantiate(playerPrefab) ;
+        player.name = Utils.RemoveCloneFormat(player.name);
+        GameManager.Instance.InitializePlayerReference();
     }
 
+    
+    
     private void Start()
     {
         StartCoroutine(SpawnEnemiesOverTime());
     }
-
-
-    //선택한 stage Level애 따라 stage 생성
-
-
-    //Player 생성
-
-    //stage Level에 맞는 몬스터 지정 
-
-
-    //코루틴을 통해 몬스터 배치 - 무한맵하고 추후 연계
-
+    
 
     //TODO 무한 맵으로 변경  
     private void MapGeneratorByLevel()
@@ -55,11 +52,15 @@ public class StageManager : MonoBehaviour
     {
         for (int i = 0; i < Define.DefaultEnemySpawnCount; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[StageLevel], transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[StageLevel -1], transform);
             newEnemy.GetComponent<HealthSystem>().OnDeathEvent += RemoveEnemy;
             enemies.Add(newEnemy);
             newEnemy.SetActive(false);
         }
+
+        bossEnemy = Instantiate(bossPrefabs[StageLevel - 1], transform);
+        bossEnemy.GetComponent<HealthSystem>().OnDeathEvent += OnStageClear;
+        bossEnemy.SetActive(false);
     }
 
 
@@ -68,6 +69,11 @@ public class StageManager : MonoBehaviour
         enemies.Remove(enemy);
     }
 
+    private void OnStageClear(GameObject bossEnemy)
+    {
+        Debug.Log($"{bossEnemy} 처치 ! {StageLevel} 클리어");
+        GameManager.Instance.StageLevel++;
+    }
 
     private IEnumerator SpawnEnemiesOverTime()
     {
@@ -87,9 +93,19 @@ public class StageManager : MonoBehaviour
                 }
             }
         }
-        
+
+        SpawnBossEnemy();
+    }
+
+
+    private void SpawnBossEnemy()
+    {
+        bossEnemy.transform.position = GameManager.Instance.Player.transform.position +
+                                      new Vector3(Random.Range(-1f, 1f), 1, 15f);
+        bossEnemy.SetActive(true);
         Debug.Log("보스 등장!! ");
     }
-    
-    
+
+
+
 }

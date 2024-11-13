@@ -7,32 +7,47 @@ using UnityEngine;
 
 public class Player: MonoBehaviour
 {
+    
     [field: SerializeField] public PlayerSO Data { get; private set;}
     public PlayerAnimationData AnimationData { get; private set;}
-    public CharacterController Controller;
-    public Vector3 originPos;
-    
-    public GameObject weapon;
-    public GameObject target;
-    
-    public Inventory Inventory { get; private set; }
-  
-    public PlayerStatHandler statHandler;
-    private PlayerStateMachine stateMachine;
+    public CharacterController controller;
     public Animator Animator;
 
+    //StateMachine 관련 필드
+    public GameObject weapon; //플레이어 근거리 무기 
+    public GameObject target; //플레이어가 타겟 중인 적
+    public Vector3 originPos; //플레이어의 기존 위치
+
+    
+    //데이터가 저장될 필요가 있는 필드
+    public PlayerStatHandler statHandler;
+    public Inventory Inventory { get; private set; }
     public LevelSystem LevelSystem  { get; private set; }
+    private PlayerStateMachine stateMachine;
+
+    
+    
     
     private void Awake()
     {
-        Inventory = GetComponent<Inventory>();
-        statHandler = new PlayerStatHandler(Data);
-        stateMachine = new PlayerStateMachine(this, statHandler);
         AnimationData = new PlayerAnimationData();
-        LevelSystem = new LevelSystem(statHandler);
         originPos = transform.position;
     }
 
+
+    public void Initialize(PlayerData playerData)
+    {
+        Inventory = GetComponent<Inventory>();  
+        statHandler = new PlayerStatHandler(Data);
+        stateMachine = new PlayerStateMachine(this, statHandler);
+        LevelSystem = new LevelSystem(statHandler);
+        
+        if (playerData !=null)
+        {
+             statHandler.Stats = playerData.stats;
+             LevelSystem.Level = playerData.level;
+        } 
+    }
     private void Start()
     {
         AnimationData.Initialize();

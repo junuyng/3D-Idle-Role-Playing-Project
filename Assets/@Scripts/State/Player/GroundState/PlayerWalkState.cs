@@ -96,7 +96,7 @@ public class PlayerWalkState : PlayerGroundState
     {
         float movementSpeed = stats.MoveSpeed * stats.StatModifier;
 
-        stateMachine.Player.Controller.Move(direction * (movementSpeed * Time.deltaTime));
+        stateMachine.Player.controller.Move(direction * (movementSpeed * Time.deltaTime));
     }
 
 

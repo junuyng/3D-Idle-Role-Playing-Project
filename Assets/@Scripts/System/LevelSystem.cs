@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelSystem
 {
-    public float Level { get; private set; } = 1;
+    public int Level { get;  set; } = 1;
     public float RequiredExp { get; private set; }
     public float CurExp { get; private set; }
 

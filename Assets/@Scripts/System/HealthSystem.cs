@@ -28,7 +28,7 @@ public class HealthSystem : MonoBehaviour
         {
             //TODO 클래스 분리 생각 해봐야 함
             if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                Managers.currencyManager.ChangeGold(100);
+                GameManager.Instance.currencyManager.ChangeGold(100);
 
             OnDeathEvent?.Invoke(gameObject);
             Destroy(gameObject);

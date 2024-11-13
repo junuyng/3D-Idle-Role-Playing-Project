@@ -15,7 +15,7 @@
     private void Start()
     {
         Initialize();
-        Managers.currencyManager.OnChangeGoldEvent += ChangeGoldText;
+        GameManager.Instance.currencyManager.OnChangeGoldEvent += ChangeGoldText;
         GameManager.Instance.Player.LevelSystem.OnLevelUpEvent += ChangeLevelText;
         GameManager.Instance.Player.LevelSystem.OnChangeExpEvent += ChangeExpBar;
     }
@@ -49,7 +49,7 @@
     
     private void ChangeGoldText()
     {
-         goldText.text = Managers.currencyManager.Gold.ToString();
+         goldText.text =  GameManager.Instance.currencyManager.Gold.ToString();
     }
 
     

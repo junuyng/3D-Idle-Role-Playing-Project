@@ -1,0 +1,23 @@
+{
+    "playerData": {
+        "stats": {
+            "StatModifier": 0.0,
+            "MaxHP": 0.0,
+            "AttackPower": 54.0,
+            "DefensePower": 19.200000762939454,
+            "CriticalDamagePercentage": 8.0,
+            "CriticalChance": 1.600000023841858,
+            "RotationSpeed": 0.0,
+            "MoveSpeed": 0.0,
+            "RunSpeed": 0.0,
+            "Level": 0,
+            "RequiredEXP": 300.0,
+            "CurEXP": 90.0,
+            "ExperienceGain": 0,
+            "JumpForce": 0.0
+        },
+        "level": 4
+    },
+    "stageLevel": 1,
+    "Gold": 400
+}

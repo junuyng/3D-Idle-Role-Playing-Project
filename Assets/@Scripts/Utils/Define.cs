@@ -3,6 +3,13 @@ using UnityEngine;
 public class Define
 {
     
+    public enum DataType
+    {
+        GameManager,
+        Player,
+        
+    }
+    
     public enum  ItemType
     {
         Weapon,
