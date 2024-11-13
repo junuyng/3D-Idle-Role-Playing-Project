@@ -5,6 +5,7 @@
     {
         public Player Player { get; set; }
 
+        public int StageLevel { get; set; } = 1;
         protected override void Awake()
         {
             base.Awake();

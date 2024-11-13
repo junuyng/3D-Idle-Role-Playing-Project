@@ -10,6 +10,7 @@ public class HealthSystem : MonoBehaviour
 
     public event Action<float> OnDamageEvent;
     public event Action<float> OnChangeEvent;
+    public event Action<GameObject> OnDeathEvent;
 
     private void Start()
     {
@@ -26,9 +27,10 @@ public class HealthSystem : MonoBehaviour
         if (newHp == 0)
         {
             //TODO 클래스 분리 생각 해봐야 함
-           if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 Managers.currencyManager.ChangeGold(100);
 
+            OnDeathEvent?.Invoke(gameObject);
             Destroy(gameObject);
         }
 

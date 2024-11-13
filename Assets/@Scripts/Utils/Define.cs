@@ -38,9 +38,10 @@ public class Define
         SlideIn,
         SlideFadeIn
     }
-    public enum StageName
+    public enum EnemyType
     {
-        Prairie // 초원 스테이지
+        Goblin,
+        Skeleton
     }
     
     // 감지 및 전투 상수
@@ -67,5 +68,7 @@ public class Define
     public const float CRITICAL_DAMAGE_INCREASE_RATE = 0.5f; // 치명타 피해 증가 비율
     public const float CRITICAL_CHANCE_INCREASE_RATE = 0.1f; // 치명타 확률 증가 비율
 
-    
+    //기본 적 생성 수 
+    public const int DefaultEnemySpawnCount = 5;
+
 }

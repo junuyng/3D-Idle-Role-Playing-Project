@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 335ff4687d8444e494dcdad081b89c05, type: 3}
-  m_Name: Creature
+  m_Name: Goblin
   m_EditorClassIdentifier: 
   data:
     <MaxHP>k__BackingField: 100
