@@ -1,23 +1,23 @@
 {
     "playerData": {
         "stats": {
-            "StatModifier": 0.0,
+            "StatModifier": 1.0,
             "MaxHP": 0.0,
-            "AttackPower": 0.0,
-            "DefensePower": 0.0,
-            "CriticalDamagePercentage": 0.0,
-            "CriticalChance": 0.0,
-            "RotationSpeed": 0.0,
-            "MoveSpeed": 0.0,
+            "AttackPower": 73.0,
+            "DefensePower": 60.400001525878909,
+            "CriticalDamagePercentage": 22.200000762939454,
+            "CriticalChance": 4.5,
+            "RotationSpeed": 1.0,
+            "MoveSpeed": 1.0,
             "RunSpeed": 0.0,
-            "Level": 0,
-            "RequiredEXP": 0.0,
-            "CurEXP": 0.0,
+            "Level": 1,
+            "RequiredEXP": 500.0,
+            "CurEXP": 90.0,
             "ExperienceGain": 0,
             "JumpForce": 0.0
         },
-        "level": 0
+        "level": 6
     },
-    "stageLevel": 3,
-    "Gold": 1200
+    "stageLevel": 2,
+    "Gold": 1100
 }

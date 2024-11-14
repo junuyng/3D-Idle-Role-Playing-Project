@@ -24,7 +24,7 @@ public class UILobby : MonoBehaviour
         for (int i = 0; i < stageButtons.Length; i++)
         {
             int index = i;
-            stageButtons[i].interactable = GameManager.Instance.MaxStageLevel >= i;
+            stageButtons[i].interactable = GameManager.Instance.MaxStageLevel > i;
             ClickSoundEffectSystem clickSoundEffectSystem =
                 new ClickSoundEffectSystem(stageButtons[i], buttonClickAudioSource, buttonClickSound);
             

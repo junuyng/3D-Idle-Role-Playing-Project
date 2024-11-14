@@ -8,7 +8,6 @@ using UnityEngine;
 //TODO 공격 데미지 전달 방식 변경 할 것 
 public class Weapon : MonoBehaviour
 {
-    int count = 0;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -74,7 +75,10 @@ public class GameManager : Singleton<GameManager>
         while (true)
         {
             yield return new WaitForSeconds(Define.AUTO_SAVE_INTERVAL);
-            Save();
+            
+            //임시로 GameScene에서만 저장하도록 처리 , Data별로 저장하도록 처리 해야함 
+            if (SceneManager.GetActiveScene().name == "GameScene")
+                Save();
         }
     }
 }

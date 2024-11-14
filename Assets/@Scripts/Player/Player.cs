@@ -24,8 +24,6 @@ public class Player: MonoBehaviour
     public Inventory Inventory { get; private set; }
     public LevelSystem LevelSystem  { get; private set; }
     private PlayerStateMachine stateMachine;
-
-    
     
     
     private void Awake()
