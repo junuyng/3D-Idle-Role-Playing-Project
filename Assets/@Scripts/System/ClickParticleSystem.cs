@@ -14,6 +14,8 @@ public class ClickParticleSystem
 
     public void StartParticleSystem()
     {
+        particleSystem.Stop();
+        particleSystem.Clear(); 
         particleSystem.Play();
     }
 

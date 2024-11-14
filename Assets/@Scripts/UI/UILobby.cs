@@ -9,7 +9,9 @@ public class UILobby : MonoBehaviour
 {
 
     [SerializeField] private Button [] stageButtons;
-
+    [SerializeField] private AudioSource buttonClickAudioSource;
+    [SerializeField] private AudioClip buttonClickSound;
+    
     private void Awake()
     {
         InitializeStageButtons();
@@ -23,6 +25,8 @@ public class UILobby : MonoBehaviour
         {
             int index = i;
             stageButtons[i].interactable = GameManager.Instance.MaxStageLevel >= i;
+            ClickSoundEffectSystem clickSoundEffectSystem =
+                new ClickSoundEffectSystem(stageButtons[i], buttonClickAudioSource, buttonClickSound);
             
             if(stageButtons[i].interactable)
                 stageButtons[i].onClick.AddListener(()=>LoadStage(index));

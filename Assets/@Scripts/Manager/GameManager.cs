@@ -6,7 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     public Player Player { get; set; }
     public CurrencyManager currencyManager;
-    
+     
     public int MaxStageLevel { get; set; } = 1;
     public int CurrentStage { get; set; }
 
