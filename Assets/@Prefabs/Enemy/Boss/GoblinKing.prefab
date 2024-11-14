@@ -134,7 +134,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 05e2cc51fc6b7534ea4e85d6e907b030, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,6 +164,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 199172675481200982}
     m_Modifications:
+    - target: {fileID: 2190431353413413331, guid: a84b4dd4d1d8ae940964bb9e30045e59,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5286502733422811362, guid: a84b4dd4d1d8ae940964bb9e30045e59,
         type: 3}
       propertyPath: m_Pivot.x

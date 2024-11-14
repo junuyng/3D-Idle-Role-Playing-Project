@@ -19,8 +19,8 @@ public class Define
     
     public enum  SceneType
     {
-        Lobby,
-        Game
+        LobbyScene,
+        GameScene
     }
 
     public enum  GameSceneUI
@@ -77,5 +77,8 @@ public class Define
 
     //기본 적 생성 수 
     public const int DefaultEnemySpawnCount = 5;
+    
+    //저장 관련 상수
+    public const float AUTO_SAVE_INTERVAL = 10f;
 
 }

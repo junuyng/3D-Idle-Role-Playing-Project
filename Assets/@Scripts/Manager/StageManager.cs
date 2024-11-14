@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class StageManager : MonoBehaviour
@@ -13,17 +14,18 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] bossPrefabs;
     [SerializeField] private GameObject[] floor;
     [SerializeField] private GameObject playerPrefab;
-    
-    public int StageLevel { get; set; } = 1;
+
+    private int stageLevel;
     private List<GameObject> enemies = new List<GameObject>();
 
     private GameObject bossEnemy;
 
     private void Awake()
     {
-        EnemyGeneratorByLevel();
-        MapGeneratorByLevel();
-         GameObject player =  Instantiate(playerPrefab) ;
+        stageLevel = GameManager.Instance.CurrentStage;
+        EnemyGeneratorByStageLevel();
+        MapGeneratorByStageLevel(); 
+        GameObject player =  Instantiate(playerPrefab) ;
         player.name = Utils.RemoveCloneFormat(player.name);
         GameManager.Instance.InitializePlayerReference();
     }
@@ -37,28 +39,28 @@ public class StageManager : MonoBehaviour
     
 
     //TODO 무한 맵으로 변경  
-    private void MapGeneratorByLevel()
+    private void MapGeneratorByStageLevel()
     {
         //임의로 10개 설치하도록 
         for (int i = 0; i < 10; i++)
         {
-            Instantiate(floor[StageLevel - 1], transform.position + Vector3.forward * i * 10, quaternion.identity,
+            Instantiate(floor[stageLevel], transform.position + Vector3.forward * i * 10, quaternion.identity,
                 transform);
         }
     }
 
 
-    private void EnemyGeneratorByLevel()
+    private void EnemyGeneratorByStageLevel()
     {
         for (int i = 0; i < Define.DefaultEnemySpawnCount; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[StageLevel -1], transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[stageLevel], transform);
             newEnemy.GetComponent<HealthSystem>().OnDeathEvent += RemoveEnemy;
             enemies.Add(newEnemy);
             newEnemy.SetActive(false);
         }
 
-        bossEnemy = Instantiate(bossPrefabs[StageLevel - 1], transform);
+        bossEnemy = Instantiate(bossPrefabs[stageLevel], transform);
         bossEnemy.GetComponent<HealthSystem>().OnDeathEvent += OnStageClear;
         bossEnemy.SetActive(false);
     }
@@ -71,8 +73,9 @@ public class StageManager : MonoBehaviour
 
     private void OnStageClear(GameObject bossEnemy)
     {
-        Debug.Log($"{bossEnemy} 처치 ! {StageLevel} 클리어");
-        GameManager.Instance.StageLevel++;
+         GameManager.Instance.MaxStageLevel++;
+         GameManager.Instance.Save();
+         SceneManager.LoadScene(Define.SceneType.LobbyScene.ToString());
     }
 
     private IEnumerator SpawnEnemiesOverTime()

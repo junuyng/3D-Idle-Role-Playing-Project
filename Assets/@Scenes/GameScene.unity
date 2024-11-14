@@ -459,6 +459,7 @@ MonoBehaviour:
   - {fileID: 5837720166815211360, guid: 6085be1facc3b8c4d87dff54d490f375, type: 3}
   bossPrefabs:
   - {fileID: 5837720166815211360, guid: 8e9336ee94b392144876b8b10ea9a57e, type: 3}
+  - {fileID: 5837720166815211360, guid: 4675025615009e245bb9f3e39c89589e, type: 3}
   floor:
   - {fileID: 4022478153402503192, guid: a3e257612817b0d4495920755dbb17fc, type: 3}
   - {fileID: 4022478153402503192, guid: 81ea43f106ab9dc4cb8af6b1cbac8e61, type: 3}

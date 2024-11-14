@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     public Player Player { get; set; }
     public CurrencyManager currencyManager;
-
-    public int StageLevel { get; set; } = 1;
-
+    
+    public int MaxStageLevel { get; set; } = 1;
+    public int CurrentStage { get; set; }
 
     protected override void Awake()
     {
@@ -14,6 +16,10 @@ public class GameManager : Singleton<GameManager>
         LoadCurrencyData();
     }
 
+    protected void Start()
+    {
+        StartCoroutine(AutoSaveCoroutine());
+    }
 
     public void InitializePlayerReference()
     {
@@ -25,7 +31,7 @@ public class GameManager : Singleton<GameManager>
     [ContextMenu("저장")]
     public void Save()
     {
-        GameData gameData = new GameData(Player, StageLevel, currencyManager);
+        GameData gameData = new GameData(Player, MaxStageLevel, currencyManager);
         DataManager.SaveData(gameData);
     }
 
@@ -47,12 +53,12 @@ public class GameManager : Singleton<GameManager>
 
         if (gameData == null)
         {
-            StageLevel = 1;
+            MaxStageLevel = 1;
             currencyManager = new CurrencyManager(0);
             return;
         }
 
-        StageLevel = gameData.stageLevel;
+        MaxStageLevel = gameData.stageLevel;
         currencyManager = new CurrencyManager(gameData.Gold);
     }
 
@@ -61,5 +67,14 @@ public class GameManager : Singleton<GameManager>
     public void DeleteData()
     {
         DataManager.DeleteData<GameData>();
+    }
+
+    private IEnumerator AutoSaveCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Define.AUTO_SAVE_INTERVAL);
+            Save();
+        }
     }
 }
