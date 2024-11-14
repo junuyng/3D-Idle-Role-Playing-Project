@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     public Player Player { get; set; }
     public CurrencyManager currencyManager;
-
+     
     public int MaxStageLevel { get; set; } = 1;
     public int CurrentStage { get; set; }
 
@@ -36,7 +35,7 @@ public class GameManager : Singleton<GameManager>
         DataManager.SaveData(gameData);
     }
 
-
+    
     public void LoadPlayerData()
     {
         GameData gameData = DataManager.LoadData<GameData>();
@@ -75,11 +74,7 @@ public class GameManager : Singleton<GameManager>
         while (true)
         {
             yield return new WaitForSeconds(Define.AUTO_SAVE_INTERVAL);
-
-            //TODO 플레이어 프리펩에 정보를 들고 있지 않고 따로 관리하도록 하기
-            //임시적으로 게임씬에서만 저장하게 함
-            if (SceneManager.GetActiveScene().name == Define.SceneType.GameScene.ToString())
-                Save();
+            Save();
         }
     }
 }
