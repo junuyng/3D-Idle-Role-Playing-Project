@@ -3,6 +3,8 @@ using UnityEngine;
 
 public  class DataManager
 {
+    
+    //TODO 파일 확인을 위해 dataPath로 설정  실제 빌드 시에는 persistentDataPath 사용 해야함
     public static void SaveData<T>(T saveData)
     {
         string directoryPath = Path.Combine(Application.dataPath, "@Data");
@@ -22,6 +24,8 @@ public  class DataManager
 
     public static T LoadData<T>() where T : class // null 반환은 참조 타입의 경우에만 가능 하므로 where를 통해 조건 걸어줌
     {
+        
+        //Combine을 사용하면 OS환경 제한 없이 PATH 설정 가능 \으로 하면 OS에 따라서 오류 생길 수 있음
         string directoryPath = Path.Combine(Application.dataPath, "@Data");
         string filePath = Path.Combine(directoryPath, $"{typeof(T).Name}.txt");
 
