@@ -12,8 +12,14 @@ public class GameData
 
     public GameData(Player _player, int _stageLevel, CurrencyManager _currencyManager)
     {
-        playerData.stats = _player.statHandler.Stats;
-        playerData.level = _player.LevelSystem.Level;
+
+        if (_player != null)
+        {
+            playerData.stats = _player.statHandler.Stats;
+            playerData.level = _player.LevelSystem.Level;
+
+        }
+
 
         stageLevel = _stageLevel;
         Gold = _currencyManager.Gold;
